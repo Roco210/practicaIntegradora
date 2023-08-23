@@ -1,12 +1,12 @@
-import mongoose from "mongoose";
+import mongoose, { Types, isObjectIdOrHexString } from "mongoose";
 
 const cartSchema=new mongoose.Schema({
     
     products:{
-        type:Object,
-        require:true,
-        default:[ ]
+        type:Array,
+        default:[]
     }
+    
 })
 
 

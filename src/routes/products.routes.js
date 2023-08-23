@@ -20,7 +20,7 @@ router.get('/:pid',async(req,res)=>{
         return}
     try{
         const prodById= await productMongo.getproductById(pid)
-        if (!prodById){
+        if (!prodById || prodById.name== "CastError"){
             res.status(400).json({mesage:`No product exists whit the ID: ${pid}`}) //el object id lleva 24 caracteres o 12 si es menor da error 
         }else{
             res.status(200).json({prodById})}
@@ -47,7 +47,7 @@ router.put('/:pid',async(req,res)=>{
         res.status(400).json({mesage:`Use a correct Id`})
         return}
     const prodById= await productMongo.getproductById(pid)
-    if (!prodById){
+    if (!prodById || prodById.name== "CastError"){
         res.status(500).json({mesage:"No product exists"})
         return}
     try{
@@ -67,7 +67,7 @@ router.delete('/:pid',async(req,res)=>{
         return}
     try{
         const del = await productMongo.deleteProduct(pid)
-        if (!del){
+        if (!del|| del.name== "CastError"){
             res.status(400).json({mesage:"the id no exists"})
         }else {res.status(200).json({mesage:"the product was delete"})
     }}
