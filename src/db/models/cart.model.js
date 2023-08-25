@@ -1,6 +1,6 @@
-import mongoose, { Types, isObjectIdOrHexString } from "mongoose";
+import mongoose from "mongoose";
 
-const cartSchema=new mongoose.Schema({
+const cartSchema= new mongoose.Schema({
     
     products:{
         type:Array,

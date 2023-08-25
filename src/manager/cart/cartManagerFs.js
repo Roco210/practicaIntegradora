@@ -66,5 +66,3 @@ export class CartManager {
         catch { (error) => { return error } }
     }
 }
-
-

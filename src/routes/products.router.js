@@ -14,29 +14,31 @@ router.get('/',async(req,res)=>{
 })
 
 router.get('/:pid',async(req,res)=>{
-    const {pid}= req.params
+    const pid= req.query.id
+    console.log(pid)
     if (pid.length != 24){
         res.status(400).json({mesage:`Use a correct Id`})
         return}
     try{
         const prodById= await productMongo.getproductById(pid)
         if (!prodById || prodById.name== "CastError"){
-            res.status(400).json({mesage:`No product exists whit the ID: ${pid}`}) //el object id lleva 24 caracteres o 12 si es menor da error 
+            res.status(400).json()
         }else{
-            res.status(200).json({prodById})}
-    }
+            res.status(200).json({mesage:"product: ", prodById})
+    }}
     catch(error){res.status(500).json({error})}
 })
 
 router.post('/',async (req,res)=>{
     const {title, description, price, thumbnail, code, stock, category, status}=req.body
     if(!title || !description || !price || !thumbnail || !stock || !code || !category){
+
         res.status(400).json({mesage:'ERROR: Not all data is complete'})
+        res.redirect("/alert")
     }
     try{
         const newProd = await productMongo.createProduct(req.body)
-        res.status(200).json({mesage:'product created: ',newProd})
-    }
+        res.status(200).json({mesage:"New product: ", newProd})}
     catch(error){res.status(500).json({error})}
 })
 

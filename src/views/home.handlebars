@@ -1,0 +1,12 @@
+<h1>ALL PRODUCTUS</h1>
+<a href="/"><button>HOME</button></a>
+<ul>
+    {{#if allprod.length}}
+    {{#each allprod}}
+    <li> {{this}}
+    </li>
+    {{/each}}
+    {{else}}
+    <h3>No product exists</h3>
+    {{/if}}
+</ul>
